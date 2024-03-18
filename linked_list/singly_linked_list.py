@@ -9,6 +9,9 @@ class SinglyLinkedList:
         self.head = None
         self.tail = None
         self.maxlen = 0
+    
+    def __len__(self):
+        return self.maxlen
 
     def append(self, item):
         node = Node(item)
@@ -54,10 +57,12 @@ class SinglyLinkedList:
     def extend(self, iterable):
         for item in iterable:
             self.append(item)
+            self.maxlen += 1
 
     def extendleft(self, iterable):
         for item in iterable:
             self.appendleft(item)
+            self.maxlen += 1
 
     def index(self, item):
         idx = 0
@@ -86,6 +91,7 @@ class SinglyLinkedList:
                 break
             idx += 1
             curr_node = curr_node.next
+        self.maxlen += 1
 
     def pop(self):
         if not self.head:
@@ -99,6 +105,7 @@ class SinglyLinkedList:
                 return ret_node_val
             
             curr_node = curr_node.next
+        self.maxlen -= 1
 
     def popleft(self):
         if not self.head:
@@ -106,6 +113,8 @@ class SinglyLinkedList:
         
         ret_node_val = self.head.val
         self.head = self.head.next
+        self.maxlen -= 1
+
         return ret_node_val
     
     def remove(self, item):
@@ -113,15 +122,34 @@ class SinglyLinkedList:
         while curr_node:
             if curr_node.next.val == item:
                 curr_node.next = curr_node.next.next
+                self.maxlen -= 1
                 break
         else:
             raise ValueError("list.remove(x): x not in linked list")
 
     def reverse(self):
-        pass
+        curr_node = self.head
+        while curr_node:
+            next_node = curr_node.next
+            next_node.next = curr_node
+            curr_node = next_node
 
-    def rotate(self):
-        pass
+    def rotate(self, n=1):
+        if n > 0:
+            for _ in range(n):
+                self.appendleft(self.pop())
+        else:
+            for _ in range(-n):
+                self.append(self.popleft())
+
+    def to_list(self):
+        ret_list = []
+        curr_node = self.head
+        while curr_node:
+            ret_list.append(curr_node.val)
+            curr_node = curr_node.next
+
+        return ret_list
 
     def print_val(self):
         curr_node = self.head
