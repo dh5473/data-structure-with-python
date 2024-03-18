@@ -75,29 +75,31 @@ class SinglyLinkedList:
         curr_node = self.head
         while curr_node:
             if curr_node.val == item:
-                print(idx)
-                break
+                return idx
             idx += 1
             curr_node = curr_node.next
         else:
             raise ValueError(f"{item} is not in linked list")
 
     def insert(self, i, item):
-        if self.maxlen <= i:
+        if self.maxlen < i:
             raise IndexError("index out of range")
 
-        idx = 0
-        curr_node = self.head
-        node = Node(item)
-        while curr_node:
-            if idx == i:
-                next_node = curr_node.next
-                curr_node.next = node
-                node.next = next_node
-                break
-            idx += 1
-            curr_node = curr_node.next
-        self.maxlen += 1
+        if i == 0:
+            self.appendleft(item)
+        else:
+            idx = 0
+            curr_node = self.head
+            node = Node(item)
+            while curr_node:
+                if idx + 1 == i:
+                    next_node = curr_node.next
+                    curr_node.next = node
+                    node.next = next_node
+                    break
+                idx += 1
+                curr_node = curr_node.next
+            self.maxlen += 1
 
     def pop(self):
         if not self.head:
@@ -108,10 +110,10 @@ class SinglyLinkedList:
         while curr_node:
             if curr_node.next == self.tail:
                 self.tail = curr_node
+                self.maxlen -= 1
                 return ret_node_val
             
             curr_node = curr_node.next
-        self.maxlen -= 1
 
     def popleft(self):
         if not self.head:
@@ -133,12 +135,16 @@ class SinglyLinkedList:
         else:
             raise ValueError("list.remove(x): x not in linked list")
 
+    # 수정 필요
     def reverse(self):
         curr_node = self.head
+        self.tail = curr_node
         while curr_node:
             next_node = curr_node.next
             next_node.next = curr_node
             curr_node = next_node
+            if not next_node:
+                self.head = curr_node
 
     def rotate(self, n=1):
         if n > 0:
