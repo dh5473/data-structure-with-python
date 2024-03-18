@@ -43,7 +43,13 @@ class SinglyLinkedList:
         self.maxlen = 0
 
     def copy(self):
-        pass
+        ret_list = SinglyLinkedList()
+        curr_node = self.head
+        while curr_node:
+            ret_list.append(curr_node.val)
+            curr_node = curr_node.next
+
+        return ret_list
 
     def count(self, item):
         cnt = 0
