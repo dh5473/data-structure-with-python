@@ -66,12 +66,10 @@ class DoublyLinkedList:
     def extend(self, iterable):
         for item in iterable:
             self.append(item)
-            self.maxlen += 1
 
     def extendleft(self, iterable):
         for item in iterable:
             self.appendleft(item)
-            self.maxlen += 1
 
     def index(self, item):
         idx = 0
@@ -111,11 +109,15 @@ class DoublyLinkedList:
     def pop(self):
         if not self.head:
             raise IndexError("pop for empty linked list")
-        
+
         ret_node_val = self.tail.val
-        self.tail = self.tail.prev
-        self.tail.next = None
-        self.maxlen -= 1
+        
+        if self.head == self.tail:
+            self.clear()
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.maxlen -= 1
 
         return ret_node_val
 
@@ -124,9 +126,13 @@ class DoublyLinkedList:
             raise IndexError("popleft for empty linked list")
         
         ret_node_val = self.head.val
-        self.head = self.head.next
-        self.head.prev = None
-        self.maxlen -= 1
+
+        if self.head == self.tail:
+            self.clear()
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            self.maxlen -= 1
 
         return ret_node_val
     
@@ -155,6 +161,7 @@ class DoublyLinkedList:
         curr_node = self.head
         while curr_node:
             curr_node.prev, curr_node.next = curr_node.next, curr_node.prev
+            curr_node = curr_node.prev
         self.head, self.tail = self.tail, self.head
 
     def rotate(self, n=1):
