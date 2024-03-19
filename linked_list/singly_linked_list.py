@@ -63,12 +63,10 @@ class SinglyLinkedList:
     def extend(self, iterable):
         for item in iterable:
             self.append(item)
-            self.maxlen += 1
 
     def extendleft(self, iterable):
         for item in iterable:
             self.appendleft(item)
-            self.maxlen += 1
 
     def index(self, item):
         idx = 0
@@ -87,6 +85,8 @@ class SinglyLinkedList:
 
         if i == 0:
             self.appendleft(item)
+        elif i == self.maxlen:
+            self.append(item)
         else:
             idx = 0
             curr_node = self.head
@@ -107,9 +107,15 @@ class SinglyLinkedList:
         
         curr_node = self.head
         ret_node_val = self.tail.val
+
+        if not curr_node.next:
+            self.clear()
+            return ret_node_val
+
         while curr_node:
             if curr_node.next == self.tail:
                 self.tail = curr_node
+                self.tail.next = None
                 self.maxlen -= 1
                 return ret_node_val
             
@@ -127,24 +133,34 @@ class SinglyLinkedList:
     
     def remove(self, item):
         curr_node = self.head
-        while curr_node:
-            if curr_node.next.val == item:
-                curr_node.next = curr_node.next.next
-                self.maxlen -= 1
-                break
+        if curr_node.val == item:
+            self.popleft()
         else:
-            raise ValueError("list.remove(x): x not in linked list")
+            while curr_node.next:
+                if curr_node.next.val == item:
+                    curr_node.next = curr_node.next.next
+                    self.maxlen -= 1
+                    break
+                curr_node = curr_node.next
+            else:
+                raise ValueError("list.remove(x): x not in linked list")
 
-    # 수정 필요
     def reverse(self):
+        stack = []
         curr_node = self.head
-        self.tail = curr_node
         while curr_node:
-            next_node = curr_node.next
-            next_node.next = curr_node
-            curr_node = next_node
-            if not next_node:
-                self.head = curr_node
+            stack.append(curr_node)
+            curr_node = curr_node.next
+        
+        if stack:
+            curr_node = stack.pop()
+            self.head = curr_node
+            while stack:
+                next_node = stack.pop()
+                curr_node.next = next_node
+                curr_node = next_node
+            self.tail = curr_node
+            self.tail.next = None
 
     def rotate(self, n=1):
         if n > 0:
