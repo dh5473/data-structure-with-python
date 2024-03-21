@@ -14,7 +14,7 @@ class LinkedStackTest(unittest.TestCase):
 
         self.assertEqual(self.stack.pop(), 3)
         self.assertEqual(self.stack.pop(), 2)
-        self.assertEqual(self.stack.last, 1)
+        self.assertEqual(self.stack.last.val, 1)
 
         self.stack.push(4)
         self.assertEqual(self.stack.pop(), 4)
@@ -45,7 +45,7 @@ class LinkedStackTest(unittest.TestCase):
         self.assertEqual(self.stack.top(), 1)
         self.stack.pop()
 
-        with self.assertRaises(IndexError):
+        with self.assertRaises(ValueError):
             self.stack.top()
 
     def test_size(self):
@@ -132,3 +132,7 @@ class StackWithQueueTest(unittest.TestCase):
 
         self.stack.pop()
         self.assertEqual(self.stack.is_empty(), 1)
+
+
+if __name__ == '__main__':
+    unittest.main()
