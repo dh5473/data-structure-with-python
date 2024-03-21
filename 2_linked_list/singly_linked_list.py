@@ -131,6 +131,7 @@ class SinglyLinkedList:
 
         return ret_node_val
     
+    # prev 도입, refactoring 필요
     def remove(self, item):
         curr_node = self.head
         if curr_node.val == item:
