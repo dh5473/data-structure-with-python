@@ -13,6 +13,15 @@ class SinglyLinkedList:
     def __len__(self):
         return self.maxlen
 
+    def __str__(self):
+        elements = []
+        curr_node = self.head
+        while curr_node:
+            elements.append(curr_node.val)
+            curr_node = curr_node.next
+        
+        return str(elements)
+
     def append(self, item):
         node = Node(item)
 
@@ -179,9 +188,3 @@ class SinglyLinkedList:
             curr_node = curr_node.next
 
         return ret_list
-
-    def print_val(self):
-        curr_node = self.head
-        while curr_node:
-            print(curr_node.val)
-            curr_node = curr_node.next
