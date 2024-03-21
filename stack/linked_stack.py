@@ -24,7 +24,7 @@ class LinkedStack:
 
     def top(self):
         if not self.last:
-            raise ValueError("pop for empty stack")
+            raise ValueError("top for empty stack")
         return self.last.val
 
     def size(self):
