@@ -154,23 +154,76 @@ class CircularQueueTest(unittest.TestCase):
         self.queue = CircularQueue()
 
     def test_enqueue(self):
-        pass
+        self.queue.enqueue(1)
+        self.queue.enqueue(3)
+        self.queue.enqueue(2)
+        
+        self.assertEqual(self.queue.is_full(), False)
+        
+        self.queue.enqueue(4)
+        self.assertEqual(self.queue.is_full(), True)
+        self.assertEqual(self.queue.dequeue(), 1)
+        self.assertEqual(self.queue.front(), 3)
+        self.assertEqual(self.queue.rear(), 4)
 
     def test_dequeue(self):
-        pass
+        self.queue.enqueue(1)
+        self.queue.enqueue(2)
+
+        self.assertEqual(self.queue.dequeue(), 1)
+        self.assertEqual(self.queue.dequeue(), 2)
+        self.assertEqual(self.queue.is_empty(), True)
+
+        with self.assertRaises(ValueError):
+            self.queue.dequeue()
 
     def test_front(self):
-        pass
+        self.queue.enqueue(1)
+        self.assertEqual(self.queue.front(), 1)
+
+        self.queue.enqueue(2)
+        self.assertEqual(self.queue.front(), 1)
+
+        self.queue.dequeue()
+        self.queue.dequeue()
+
+        with self.assertRaises(ValueError):
+            self.queue.front()
 
     def test_rear(self):
-        pass
+        self.queue.enqueue(1)
+        self.assertEqual(self.queue.rear(), 1)
+
+        self.queue.enqueue(2)
+        self.assertEqual(self.queue.rear(), 2)
+
+        self.queue.dequeue()
+        self.assertEqual(self.queue.rear(), 2)
+
+        self.queue.dequeue()
+
+        with self.assertRaises(ValueError):
+            self.queue.rear()
 
     def test_is_empty(self):
-        pass
+        self.assertEqual(self.queue.is_empty(), True)
+        
+        self.queue.enqueue(1)
+        self.assertEqual(self.queue.is_empty(), False)
+        
+        self.queue.dequeue()
+        self.assertEqual(self.queue.is_empty(), True)
 
     def test_is_full(self):
-        pass
+        self.assertEqual(self.queue.is_full(), False)
 
+        self.queue.enqueue(1)
+        self.queue.enqueue(2)
+        self.queue.enqueue(3)
+        self.assertEqual(self.queue.is_full(), False)
+
+        self.queue.enqueue(4)
+        self.assertEqual(self.queue.is_full(), True)
 
 if __name__ == '__main__':
     unittest.main()
