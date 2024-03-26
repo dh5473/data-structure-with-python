@@ -34,13 +34,15 @@ class HashTable:
         if self.table[idx] is None:
             self.table[idx] = Node(key, value)
         else:
+            prev_node = None
             curr_node: Node = self.table[idx]
             while curr_node:
                 if curr_node.key == key:
                     curr_node.value = value
                     return
+                prev_node = curr_node
                 curr_node = curr_node.next
-            curr_node = Node(key, value)
+            prev_node.next = Node(key, value)
         
         self.size += 1
 
@@ -87,5 +89,6 @@ class HashTable:
         for idx in range(prev_capacity):
             curr_node: Node = prev_table[idx]
             while curr_node:
-                self.table.insert(curr_node.key, curr_node.value)
+                # self.table.insert -> self.insert
+                self.insert(curr_node.key, curr_node.value)
                 curr_node = curr_node.next
