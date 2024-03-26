@@ -24,7 +24,7 @@ class HashTable:
         step = 1
         while self.table[idx] is not None:
             if self.table[idx][0] == key:
-                self.table[idx][1] = value
+                self.table[idx] = (key, value)
                 break
             idx = (idx + step ** 2) % self.capacity
             step += 1
@@ -71,4 +71,5 @@ class HashTable:
         self.size = 0
 
         for idx in range(prev_capacity):
-            self.insert(prev_table[idx][0], prev_table[idx][1])
+            if prev_table[idx]:
+                self.insert(prev_table[idx][0], prev_table[idx][1])
