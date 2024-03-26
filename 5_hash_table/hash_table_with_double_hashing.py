@@ -20,7 +20,8 @@ class HashTable:
 
     def _hash2(self, key):
         prime = self.capacity - 1
-        return prime - (key % prime)
+        # prime - (key % prime) <- only int
+        return prime - (len(str(key)) % prime)
 
     def insert(self, key, value):
         idx = self._hash1(key)
@@ -28,9 +29,11 @@ class HashTable:
 
         while self.table[idx] is not None:
             if self.table[idx][0] == key:
-                self.table[idx][1] = value
+                self.table[idx] = (key, value)
                 break
-            idx += step
+            idx = (idx + step) % self.capacity
+            # solution to infinite loop problem from step(fixed hash2)
+            step += 1
         else:
             self.table[idx] = (key, value)
 
@@ -46,7 +49,9 @@ class HashTable:
         while self.table[idx] is not None:
             if self.table[idx][0] == key:
                 return self.table[idx][1]
-            idx += step
+            idx = (idx + step) % self.capacity
+            # solution to infinite loop problem from step(fixed hash2)
+            step += 1
         
         raise KeyError(key)
 
@@ -59,7 +64,9 @@ class HashTable:
                 self.table[idx] = None
                 self.size -= 1
                 return
-            idx += step
+            idx = (idx + step) % self.capacity
+            # solution to infinite loop problem from step(fixed hash2)
+            step += 1
         
         raise KeyError(key)
 
@@ -69,6 +76,8 @@ class HashTable:
 
         self.capacity *= 2
         self.table = [None] * self.capacity
+        self.size = 0
 
         for idx in range(prev_capacity):
-            self.insert(prev_table[idx][0], prev_table[idx][1])
+            if prev_table[idx]:
+                self.insert(prev_table[idx][0], prev_table[idx][1])
