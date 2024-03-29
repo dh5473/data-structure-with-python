@@ -140,17 +140,19 @@ class SinglyLinkedList:
 
         return ret_node_val
     
-    # prev 도입, refactoring 필요
     def remove(self, item):
-        curr_node = self.head
+        prev_node: Node = None
+        curr_node: Node = self.head
+
         if curr_node.val == item:
             self.popleft()
         else:
-            while curr_node.next:
-                if curr_node.next.val == item:
-                    curr_node.next = curr_node.next.next
+            while curr_node:
+                if curr_node.val == item:
+                    prev_node.next = curr_node.next
                     self.maxlen -= 1
                     break
+                prev_node = curr_node
                 curr_node = curr_node.next
             else:
                 raise ValueError("list.remove(x): x not in linked list")
