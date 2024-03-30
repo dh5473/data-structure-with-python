@@ -71,8 +71,8 @@ class UndirectedGraph:
             if curr_node.idx == v2:
                 prev_node.next = curr_node.next
                 break
-            curr_node = curr_node.next
             prev_node = curr_node
+            curr_node = curr_node.next
         else:
             raise ValueError(f"no edge between {v1} and {v2}")
         
@@ -82,8 +82,8 @@ class UndirectedGraph:
             if curr_node.idx == v1:
                 prev_node.next = curr_node.next
                 break
-            curr_node = curr_node.next
             prev_node = curr_node
+            curr_node = curr_node.next
         else:
             raise ValueError(f"no edge between {v2} and {v1}")
 
@@ -140,7 +140,7 @@ class DirectedGraph:
             if curr_node.idx == v2:
                 prev_node.next = curr_node.next
                 break
-            curr_node = curr_node.next
             prev_node = curr_node
+            curr_node = curr_node.next
         else:
             raise ValueError(f"no edge {v1} to {v2}")
