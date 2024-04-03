@@ -1,6 +1,6 @@
 class ArrayBinaryTree:
     def __init__(self, size):
-        self.tree = [None] * size
+        self.tree = [None] * (size + 1)
         self.size = size
 
     def __str__(self):
@@ -18,7 +18,7 @@ class ArrayBinaryTree:
         return self.tree[idx]
 
     def set_root(self, val):
-        self.tree[0] = val
+        self.tree[1] = val
 
     def set_left(self, idx, val):
         self._validate_index(idx)
@@ -35,55 +35,55 @@ class ArrayBinaryTree:
     def find_parent(self, idx):
         self._validate_index(idx)
 
-        if idx == 0:
+        if idx == 1:
             raise ValueError()
 
-        return (idx - 1) // 2
+        return idx // 2
 
     def find_left_child(self, idx):
         self._validate_index(idx)
 
-        if idx * 2 + 1 >= self.size:
+        if idx * 2 > self.size:
             raise IndexError()
 
-        # if self.tree[idx * 2 + 1] is None:
+        # if self.tree[idx * 2] is None:
         #     raise ValueError()
 
-        return idx * 2 + 1
+        return idx * 2
 
     def find_right_child(self, idx):
         self._validate_index(idx)
 
-        if idx * 2 + 2 >= self.size:
+        if idx * 2 + 1 >= self.size:
             raise IndexError()
         
-        # if self.tree[idx * 2 + 2] is None:
+        # if self.tree[idx * 2 + 1] is None:
         #     raise ValueError()
         
-        return idx * 2 + 2
+        return idx * 2 + 1
 
     def find_left_sibling(self, idx):
         if not idx % 2:
             raise IndexError()
         
-        self._validate_index(idx - 1)
-
-        if self.tree[idx - 1] is None:
-            raise ValueError()
-
-        return idx - 1
-
-    def find_right_sibling(self, idx):
-        if idx % 2:
-            raise IndexError()
-        
         self._validate_index(idx + 1)
-        
+
         if self.tree[idx + 1] is None:
             raise ValueError()
 
         return idx + 1
 
+    def find_right_sibling(self, idx):
+        if idx % 2:
+            raise IndexError()
+        
+        self._validate_index(idx - 1)
+        
+        if self.tree[idx - 1] is None:
+            raise ValueError()
+
+        return idx - 1
+
     def _validate_index(self, idx):
-        if idx < 0 or idx >= self.size:
+        if idx < 1 or idx > self.size:
             raise IndexError("tree index out of range")
