@@ -24,7 +24,7 @@ class LinkedQueue:
 
     def dequeue(self):
         if not self.length:
-            raise IndexError("dequeue for empty queue")
+            raise IndexError("dequeue for empty queue_")
 
         ret_node = self.head
         if self.head.next:
@@ -39,7 +39,7 @@ class LinkedQueue:
 
     def peek(self):
         if not self.head:
-            raise ValueError("peek for empty queue")
+            raise ValueError("peek for empty queue_")
         return self.head.val
 
     def size(self):

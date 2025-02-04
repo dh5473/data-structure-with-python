@@ -10,7 +10,7 @@ class QueueWithStack:
 
     def dequeue(self):
         if not self.length:
-            raise IndexError("dequeue for empty queue")
+            raise IndexError("dequeue for empty queue_")
 
         if not self.stack_out:
             while self.stack_in:
@@ -21,7 +21,7 @@ class QueueWithStack:
 
     def peek(self):
         if not self.length:
-            raise ValueError("peek for empty queue")
+            raise ValueError("peek for empty queue_")
 
         if not self.stack_out:
             while self.stack_in:

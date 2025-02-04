@@ -11,7 +11,7 @@ class CircularQueue:
     
     def enqueue(self, item):
         if self.length == self.maxlen:
-            raise IndexError("enqueue for full queue")
+            raise IndexError("enqueue for full queue_")
         
         if self.length:
             self.rear_pointer = (self.rear_pointer + 1) % self.maxlen
@@ -21,7 +21,7 @@ class CircularQueue:
 
     def dequeue(self):
         if not self.length:
-            raise ValueError("dequeue for empty queue")
+            raise ValueError("dequeue for empty queue_")
         
         ret_val = self.queue[self.front_pointer]
         self.queue[self.front_pointer] = None
@@ -34,12 +34,12 @@ class CircularQueue:
 
     def front(self):
         if self.queue[self.front_pointer] is None:
-            raise ValueError("front for empty queue")
+            raise ValueError("front for empty queue_")
         return self.queue[self.front_pointer]
 
     def rear(self):
         if self.queue[self.rear_pointer] is None:
-            raise ValueError("rear for empty queue")
+            raise ValueError("rear for empty queue_")
         return self.queue[self.rear_pointer]
 
     def is_empty(self):

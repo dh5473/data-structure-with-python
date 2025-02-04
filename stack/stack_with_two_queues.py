@@ -1,5 +1,5 @@
 from collections import deque  # just data structure with doubly linked list
-# import queue -> for communication with different threads
+# import queue_ -> for communication with different threads
 
 
 class StackWithQueue:
