@@ -1,6 +1,6 @@
-from queue_with_two_stacks import QueueWithStack
-from circular_queue import CircularQueue
-from linked_queue import LinkedQueue
+from queue_.queue_with_two_stacks import QueueWithStack
+from queue_.circular_queue import CircularQueue
+from queue_.linked_queue import LinkedQueue
 import unittest
 
 

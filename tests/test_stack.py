@@ -1,5 +1,5 @@
-from stack_with_two_queues import StackWithQueue
-from linked_stack import LinkedStack
+from stack.stack_with_two_queues import StackWithQueue
+from stack.linked_stack import LinkedStack
 import unittest
 
 

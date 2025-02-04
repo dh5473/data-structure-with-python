@@ -1,4 +1,4 @@
-from dynamic_array import ArrayList
+from array_list.dynamic_array import ArrayList
 import unittest
 
 

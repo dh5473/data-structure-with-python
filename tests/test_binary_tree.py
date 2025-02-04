@@ -1,5 +1,5 @@
-import array_binary_tree
-import node_binary_tree
+import binary_tree.array_binary_tree
+import binary_tree.node_binary_tree
 import unittest
 
 

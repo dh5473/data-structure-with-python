@@ -1,5 +1,5 @@
-import adjacency_matrix_graph as mg
-import adjacency_list_graph as lg
+import graph.adjacency_matrix_graph as mg
+import graph.adjacency_list_graph as lg
 import unittest
 
 

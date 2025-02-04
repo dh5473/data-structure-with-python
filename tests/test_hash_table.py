@@ -1,7 +1,7 @@
-import hash_table_with_separate_chaining as sc
-import hash_table_with_linear_probing as lp
-import hash_table_with_quadratic_probing as qp
-import hash_table_with_double_hashing as dh
+import hash_table.separate_chaining_hash_table as sc
+import hash_table.linear_probing_hash_table as lp
+import hash_table.quadratic_probing_hash_table as qp
+import hash_table.double_hashing_hash_table as dh
 import unittest
 
 
